@@ -17,23 +17,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        t.add(new Student("Bob", "123", "aabb"));
-        t.add(new Student("Mary", "234", "ccdd"));
 
-        Student[] mylist = t.getData();
-        for (Student s: mylist)
-        {
-            Log.d("DATAS", s.toString());
-        }
 
-        Student editStudent = mylist[0];
-        editStudent.tel = "987";
-        t.update(editStudent);
 
-        Student[] mylist1 = t.getData();
-        for (Student s: mylist1)
-        {
-            Log.d("DATAS", "update:" + s.toString());
-        }
+//        t.add(new Student("Bob", "123", "aabb"));
+//        t.add(new Student("Mary", "234", "ccdd"));
+//
+//        Student[] mylist = t.getData();
+//        for (Student s: mylist)
+//        {
+//            Log.d("DATAS", s.toString());
+//        }
+//
+//        Student editStudent = mylist[0];
+//        editStudent.tel = "987";
+//        t.update(editStudent);
+//
+//        Student[] mylist1 = t.getData();
+//        for (Student s: mylist1)
+//        {
+//            Log.d("DATAS", "update:" + s.toString());
+//        }
     }
 }
