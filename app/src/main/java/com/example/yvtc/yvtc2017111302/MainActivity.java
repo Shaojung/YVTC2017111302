@@ -2,6 +2,8 @@ package com.example.yvtc.yvtc2017111302;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.yvtc.yvtc2017111302.data.Student;
@@ -12,11 +14,20 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static StudentDAOMemoryImpl t = new StudentDAOMemoryImpl();
-    @Override
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter<MyAdapter.ViewHolder> mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
+        mRecyclerView.setHasFixedSize(false);
+        mLayoutManager = new LinearLayoutManager(MainActivity.this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        t.add(new Student("Bob", "123", "123"));
+        t.add(new Student("Mary", "123", "123"));
+        mAdapter = new MyAdapter(MainActivity.this, t.getData());
+        mRecyclerView.setAdapter(mAdapter);
 
 
 
