@@ -20,4 +20,16 @@ public class StudentDAOTest1 {
     {
         return data;
     }
+    public void update(Student s)
+    {
+        for (Student tmp : data)
+        {
+            if (tmp.id == s.id)
+            {
+                tmp.name = s.name;
+                tmp.tel = s.tel;
+                tmp.addr = s.addr;
+            }
+        }
+    }
 }
