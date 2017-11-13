@@ -11,13 +11,12 @@ import com.example.yvtc.yvtc2017111302.data.StudentDAOTest1;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static StudentDAOMemoryImpl t = new StudentDAOMemoryImpl();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StudentDAOMemoryImpl t = new StudentDAOMemoryImpl();
         t.add(new Student("Bob", "123", "aabb"));
         t.add(new Student("Mary", "234", "ccdd"));
 
