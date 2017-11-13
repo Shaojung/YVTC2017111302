@@ -8,10 +8,14 @@ import java.util.ArrayList;
 
 public class StudentDAOTest1 {
     ArrayList<Student> data = new ArrayList();
+    int MaxID = 1;
     public void add(Student s)
     {
+        s.id = MaxID;
         data.add(s);
+        MaxID++;
     }
+
     public ArrayList<Student> getData()
     {
         return data;

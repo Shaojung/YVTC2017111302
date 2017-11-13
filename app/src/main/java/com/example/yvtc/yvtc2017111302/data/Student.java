@@ -5,6 +5,7 @@ package com.example.yvtc.yvtc2017111302.data;
  */
 
 public class Student {
+    int id;
     public String name;
     public String tel;
     public String addr;
@@ -19,6 +20,6 @@ public class Student {
     @Override
     public String toString()
     {
-        return name + "," + tel + "," + addr;
+        return id + "," + name + "," + tel + "," + addr;
     }
 }
