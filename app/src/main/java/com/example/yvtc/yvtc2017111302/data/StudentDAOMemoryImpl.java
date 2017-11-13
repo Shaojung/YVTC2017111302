@@ -1,22 +1,36 @@
 package com.example.yvtc.yvtc2017111302.data;
 
+import java.util.ArrayList;
+
 /**
  * Created by yvtc on 2017/11/13.
  */
 
 public class StudentDAOMemoryImpl implements StudentDAO {
+    ArrayList<Student> data = new ArrayList();
+    int MaxID = 1;
     @Override
     public void add(Student s) {
-
+        s.id = MaxID;
+        data.add(s);
+        MaxID++;
     }
 
     @Override
     public Student[] getData() {
-        return new Student[0];
+        return data.toArray(new Student[data.size()]);
     }
 
     @Override
     public void update(Student s) {
-
+        for (Student tmp : data)
+        {
+            if (tmp.id == s.id)
+            {
+                tmp.name = s.name;
+                tmp.tel = s.tel;
+                tmp.addr = s.addr;
+            }
+        }
     }
 }
