@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.yvtc.yvtc2017111302.data.Student;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOMemoryImpl;
@@ -29,27 +32,31 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         t.add(new Student("Bob", "123", "123"));
         t.add(new Student("Mary", "123", "123"));
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View v = rv.findChildViewUnder(e.getX(), e.getY());
+                int position = rv.getChildLayoutPosition(v);
+                // Toast.makeText(MainActivity.this, "posi:" + position, Toast.LENGTH_SHORT).show();
+                if (position >= 0)
+                {
+                    Intent it = new Intent(MainActivity.this, DetailActivity.class);
+                    it.putExtra("id", t.getData()[position].id);
+                    startActivity(it);
+                }
+                return false;
+            }
 
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
 
+            }
 
-//        t.add(new Student("Bob", "123", "aabb"));
-//        t.add(new Student("Mary", "234", "ccdd"));
-//
-//        Student[] mylist = t.getData();
-//        for (Student s: mylist)
-//        {
-//            Log.d("DATAS", s.toString());
-//        }
-//
-//        Student editStudent = mylist[0];
-//        editStudent.tel = "987";
-//        t.update(editStudent);
-//
-//        Student[] mylist1 = t.getData();
-//        for (Student s: mylist1)
-//        {
-//            Log.d("DATAS", "update:" + s.toString());
-//        }
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 
     @Override
