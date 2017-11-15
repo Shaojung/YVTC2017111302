@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
                 public boolean onSingleTapUp(MotionEvent e) {
                     return true;
                 }
+
             }
         );
         mRecyclerView.addOnItemTouchListener(this);
@@ -69,8 +70,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
         View v = rv.findChildViewUnder(e.getX(), e.getY());
+        Log.d("Touch", "onInterceptTouchEvent");
         if (mGD.onTouchEvent(e))
         {
+            Log.d("Touch", "Single Tap up");
             int position = rv.getChildLayoutPosition(v);
             // Toast.makeText(MainActivity.this, "posi:" + position, Toast.LENGTH_SHORT).show();
             if (position >= 0)
