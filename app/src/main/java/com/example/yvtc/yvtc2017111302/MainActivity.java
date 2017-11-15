@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
         );
         mRecyclerView.addOnItemTouchListener(this);
 
+
     }
 
     @Override
