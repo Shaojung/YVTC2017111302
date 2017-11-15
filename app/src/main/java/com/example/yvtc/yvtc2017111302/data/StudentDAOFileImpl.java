@@ -53,14 +53,19 @@ public class StudentDAOFileImpl implements StudentDAO {
             String str = br.readLine();
             br.close();
             fr.close();
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-            data = gson.fromJson(str, listType);
+            System.out.println("string:" + str);
+            if (str.trim().length() > 0)
+            {
+                Gson gson = new Gson();
+                Type listType = new TypeToken<ArrayList<Student>>() {}.getType();
+                data = gson.fromJson(str, listType);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -72,7 +77,7 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public Student[] getData() {
-        return new Student[0];
+        return data.toArray(new Student[data.size()]);
     }
 
     @Override
@@ -87,7 +92,8 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public void clear() {
-
+        data.clear();
+        saveData();
     }
 
     @Override
