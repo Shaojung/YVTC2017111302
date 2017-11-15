@@ -22,20 +22,37 @@ public class MyDAOTest {
     public void TestMemoryDAO1()
     {
         StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
         dao.add(new Student("AA", "11", "aabb"));
+        dao.clear();
         dao.add(new Student("BB", "22", "aabb"));
         dao.add(new Student("CC", "33", "aabb"));
         Student[] stus = dao.getData();
-        assertEquals(stus.length, 3);
+        assertEquals(stus.length, 2);
     }
     @Test
     public void TestMemoryDAO2()
     {
         StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
         dao.add(new Student("AA", "11", "aabb"));
         dao.add(new Student("BB", "22", "aabb"));
         dao.add(new Student("CC", "33", "aabb"));
         Student[] stus = dao.getData();
         assertEquals(stus[1].tel, "22");
+    }
+    @Test
+    public void TestMemoryDAO3Update()
+    {
+        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+        Student[] stus = dao.getData();
+        Student s = stus[1];
+        s.addr = "XYZ";
+        Student[] check = dao.getData();
+        assertEquals(check[1].addr, "XYZ");
     }
 }
