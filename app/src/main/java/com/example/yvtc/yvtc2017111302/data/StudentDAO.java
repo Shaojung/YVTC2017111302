@@ -10,4 +10,6 @@ public interface StudentDAO {
     void update(Student s);
     void delete(Student s);
     void clear();
+    Student getOneStudent(int id);
+    Student[] searchByName(String name);
 }
