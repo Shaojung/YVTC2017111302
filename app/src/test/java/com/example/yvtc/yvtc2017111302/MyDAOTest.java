@@ -70,4 +70,27 @@ public class MyDAOTest {
         Student[] check = dao.getData();
         assertEquals(2, check.length);
     }
+    @Test
+    public void TestMemoryDAO5getOne()
+    {
+        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+        Student s = dao.getOneStudent(2);
+        assertEquals(s.name, "BB");
+    }
+    @Test
+    public void TestMemoryDAO6Search()
+    {
+        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+        Student s[] = dao.searchByName("CC");
+
+        assertEquals(s[0].tel, "33");
+    }
 }
