@@ -52,6 +52,7 @@ public class MyDAOTest {
         Student[] stus = dao.getData();
         Student s = stus[1];
         s.addr = "XYZ";
+        dao.update(s);
         Student[] check = dao.getData();
         assertEquals(check[1].addr, "XYZ");
     }
