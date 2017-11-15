@@ -93,4 +93,17 @@ public class MyDAOTest {
 
         assertEquals(s[0].tel, "33");
     }
+    @Test
+    public void TestMemoryDAO7Search()
+    {
+        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+        dao.add(new Student("CC", "44", "44bb"));
+        Student s[] = dao.searchByName("CC");
+
+        assertEquals(2, s.length);
+    }
 }
