@@ -23,6 +23,7 @@ import java.util.List;
 public class StudentDAOFileImpl implements StudentDAO {
     ArrayList<Student> data;
     Context context;
+    int MaxID;
     String DATA_FILE;
     public StudentDAOFileImpl(Context context)
     {
@@ -66,12 +67,27 @@ public class StudentDAOFileImpl implements StudentDAO {
             e.printStackTrace();
         }
 
+        if (data.size() > 0)
+        {
+            MaxID = data.get(0).id;
+        }
+        for (Student s : data)
+        {
+            if (MaxID < s.id)
+            {
+                MaxID = s.id;
+            }
+        }
+        MaxID += 1;
+
 
     }
 
     @Override
     public void add(Student s) {
+        s.id = MaxID;
         data.add(s);
+        MaxID++;
         saveData();
     }
 

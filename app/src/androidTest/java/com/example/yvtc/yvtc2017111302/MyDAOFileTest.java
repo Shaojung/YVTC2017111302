@@ -33,4 +33,23 @@ public class MyDAOFileTest {
         assertEquals(stus.length, 2);
 
     }
+    @Test
+    public void TestUpdate1() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        StudentDAOFileImpl dao = new StudentDAOFileImpl(appContext);
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+
+        Student[] stus = dao.getData();
+        Student s = stus[1];
+        s.name = "TT";
+        dao.update(s);
+        Student[] stus2 = dao.getData();
+
+        assertEquals(stus2[1].name, "TT");
+
+    }
 }
