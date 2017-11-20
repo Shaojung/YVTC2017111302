@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.yvtc.yvtc2017111302.data.DAOType;
 import com.example.yvtc.yvtc2017111302.data.Student;
 import com.example.yvtc.yvtc2017111302.data.StudentDAO;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOFactory;
@@ -24,14 +25,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RecyclerView.OnItemTouchListener {
     public static StudentDAO t;
+    final DAOType type = DAOType.FILE;
+
     RecyclerView mRecyclerView;
     RecyclerView.Adapter<MyAdapter.ViewHolder> mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     GestureDetector mGD;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        t = StudentDAOFactory.getStudentDAO(2, this);
+        t = StudentDAOFactory.getStudentDAO(type, this);
         mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(MainActivity.this);
