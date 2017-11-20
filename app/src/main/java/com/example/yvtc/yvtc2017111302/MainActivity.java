@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.yvtc.yvtc2017111302.data.Student;
+import com.example.yvtc.yvtc2017111302.data.StudentDAO;
+import com.example.yvtc.yvtc2017111302.data.StudentDAOFactory;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOFileImpl;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOMemoryImpl;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOTest1;
@@ -21,7 +23,7 @@ import com.example.yvtc.yvtc2017111302.data.StudentDAOTest1;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RecyclerView.OnItemTouchListener {
-    public static StudentDAOFileImpl t;
+    public static StudentDAO t;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter<MyAdapter.ViewHolder> mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        t = new StudentDAOFileImpl(this);
+        t = StudentDAOFactory.getStudentDAO(2, this);
         mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(MainActivity.this);

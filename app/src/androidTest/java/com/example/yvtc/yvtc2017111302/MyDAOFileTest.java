@@ -74,7 +74,8 @@ public class MyDAOFileTest {
         dao.add(new Student("AA", "11", "aabb"));
         dao.add(new Student("BB", "22", "aabb"));
         dao.add(new Student("CC", "33", "aabb"));
-        Student s = dao.getOneStudent(2);
+        Student[] check = dao.getData();
+        Student s = dao.getOneStudent(check[1].id);
         assertEquals(s.name, "BB");
     }
 }
