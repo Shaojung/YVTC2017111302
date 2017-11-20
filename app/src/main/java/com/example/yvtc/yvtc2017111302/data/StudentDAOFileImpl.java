@@ -131,11 +131,26 @@ public class StudentDAOFileImpl implements StudentDAO {
 
     @Override
     public Student getOneStudent(int id) {
+        for (Student tmp : data)
+        {
+            if (tmp.id == id)
+            {
+                return tmp;
+            }
+        }
         return null;
     }
 
     @Override
     public Student[] searchByName(String name) {
-        return new Student[0];
+        ArrayList<Student> tmpList = new ArrayList<>();
+        for (Student tmp : data)
+        {
+            if (tmp.name.equals(name))
+            {
+                tmpList.add(tmp);
+            }
+        }
+        return tmpList.toArray(new Student[tmpList.size()]);
     }
 }

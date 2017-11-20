@@ -65,4 +65,16 @@ public class MyDAOFileTest {
         Student[] check = dao.getData();
         assertEquals(2, check.length);
     }
+    @Test
+    public void TestGetOne1() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        StudentDAOFileImpl dao = new StudentDAOFileImpl(appContext);
+        dao.clear();
+        dao.add(new Student("AA", "11", "aabb"));
+        dao.add(new Student("BB", "22", "aabb"));
+        dao.add(new Student("CC", "33", "aabb"));
+        Student s = dao.getOneStudent(2);
+        assertEquals(s.name, "BB");
+    }
 }
