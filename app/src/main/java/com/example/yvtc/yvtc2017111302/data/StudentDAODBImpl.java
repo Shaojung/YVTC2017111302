@@ -48,17 +48,21 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public void update(Student s) {
-
+        ContentValues cv = new ContentValues();
+        cv.put("name", s.name);
+        cv.put("tel", s.tel);
+        cv.put("addr", s.addr);
+        db.update("students", cv, "_id=?", new String[] {String.valueOf(s.id)});
     }
 
     @Override
     public void delete(Student s) {
-
+        db.delete("students", "_id=?", new String[] {String.valueOf(s.id)});
     }
 
     @Override
     public void clear() {
-
+        db.delete("students", null, null);
     }
 
     @Override
