@@ -8,7 +8,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +26,10 @@ public class StudentDAOCloudImpl implements StudentDAO {
     FirebaseDatabase database;
     DatabaseReference myRef;
     final String TAG = "CloudImpl";
+    int MaxID;
     public StudentDAOCloudImpl(Context context)
     {
         this.context = context;
-        data = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("studentdata");
         // Read from the database
@@ -34,6 +39,29 @@ public class StudentDAOCloudImpl implements StudentDAO {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
+                Gson gson = new Gson();
+                Type listType = new TypeToken<ArrayList<Student>>() {}.getType();
+                data = gson.fromJson(value, listType);
+                if (data!=null)
+                {
+                    if (data != null && data.size() > 0)
+                    {
+                        MaxID = data.get(0).id;
+                    }
+                    for (Student s : data)
+                    {
+                        if (MaxID < s.id)
+                        {
+                            MaxID = s.id;
+                        }
+                    }
+                }
+                else
+                {
+                    data = new ArrayList<>();
+                }
+
+                MaxID += 1;
                 Log.d(TAG, "Value is: " + value);
             }
 
@@ -45,9 +73,19 @@ public class StudentDAOCloudImpl implements StudentDAO {
         });
     }
 
+    private void saveData()
+    {
+        Gson gson = new Gson();
+        String str = gson.toJson(data);
+        myRef.setValue(str);
+    }
+
     @Override
     public void add(Student s) {
-
+        s.id = MaxID;
+        data.add(s);
+        MaxID++;
+        saveData();
     }
 
     @Override

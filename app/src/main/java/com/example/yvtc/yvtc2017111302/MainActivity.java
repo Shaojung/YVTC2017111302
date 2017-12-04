@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RecyclerView.OnItemTouchListener {
     public static StudentDAO t;
-    final DAOType type = DAOType.DB;
+    final DAOType type = DAOType.CLOUD;
 
     RecyclerView mRecyclerView;
     RecyclerView.Adapter<MyAdapter.ViewHolder> mAdapter;
