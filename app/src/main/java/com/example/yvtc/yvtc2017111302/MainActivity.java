@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.yvtc.yvtc2017111302.data.DAOType;
+import com.example.yvtc.yvtc2017111302.data.OnCloudReceivedListener;
 import com.example.yvtc.yvtc2017111302.data.Student;
 import com.example.yvtc.yvtc2017111302.data.StudentDAO;
 import com.example.yvtc.yvtc2017111302.data.StudentDAOFactory;
@@ -23,7 +24,9 @@ import com.example.yvtc.yvtc2017111302.data.StudentDAOTest1;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements RecyclerView.OnItemTouchListener {
+public class MainActivity extends AppCompatActivity implements RecyclerView.OnItemTouchListener
+    , OnCloudReceivedListener
+{
     public static StudentDAO t;
     final DAOType type = DAOType.CLOUD;
 
@@ -52,8 +55,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
             }
         );
         mRecyclerView.addOnItemTouchListener(this);
-
-
     }
 
     @Override
@@ -106,5 +107,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
+    }
+
+    @Override
+    public void onReceivedEvent() {
+        mAdapter = new MyAdapter(MainActivity.this, t.getData());
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
