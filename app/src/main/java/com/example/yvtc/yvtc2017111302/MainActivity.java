@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
     RecyclerView.Adapter<MyAdapter.ViewHolder> mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     GestureDetector mGD;
-
+    final String TAG = "CloudImpl";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -59,8 +59,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnIt
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume, before set Adapter");
         mAdapter = new MyAdapter(MainActivity.this, t.getData());
         mRecyclerView.setAdapter(mAdapter);
+        Log.d(TAG, "onResume, after set Adapter");
     }
 
     @Override

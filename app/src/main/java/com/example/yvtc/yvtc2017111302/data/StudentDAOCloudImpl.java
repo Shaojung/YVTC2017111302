@@ -32,12 +32,15 @@ public class StudentDAOCloudImpl implements StudentDAO {
         this.context = context;
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("studentdata");
+        data = new ArrayList<>();
         // Read from the database
+        Log.d(TAG, "In Cloud Constructor");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                Log.d(TAG, "Start to get data");
                 String value = dataSnapshot.getValue(String.class);
                 Gson gson = new Gson();
                 Type listType = new TypeToken<ArrayList<Student>>() {}.getType();
@@ -90,7 +93,16 @@ public class StudentDAOCloudImpl implements StudentDAO {
 
     @Override
     public Student[] getData() {
-        return new Student[0];
+        if (data != null)
+        {
+            return data.toArray(new Student[data.size()]);
+        }
+        else
+        {
+            new ArrayList();
+        }
+        return null;
+
     }
 
     @Override
