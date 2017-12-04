@@ -79,8 +79,6 @@ public class StudentDAOFileImpl implements StudentDAO {
             }
         }
         MaxID += 1;
-
-
     }
 
     @Override

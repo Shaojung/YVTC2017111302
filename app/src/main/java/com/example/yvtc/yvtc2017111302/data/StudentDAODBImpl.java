@@ -73,7 +73,6 @@ public class StudentDAODBImpl implements StudentDAO {
             Student s = new Student(c.getInt(0), c.getString(1), c.getString(2), c.getString(3));
             return s;
         }
-
         return null;
     }
 
